@@ -1,23 +1,20 @@
 import { NextResponse } from "next/server";
+// import { signJWT } from "@/utils/helpers/authHelpers";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function GET(req) {
-  let users = [];
-  users = await prisma.user.findMany();
-  return NextResponse.json(users);
-}
-
-// Registerで作るからここでは不要。
 export async function POST(req) {
   let body;
   try {
     body = await req.json();
+    if (!body.email || !body.password || !body.name) {
+      throw new Error();
+    }
   } catch (error) {
     return NextResponse.json(
       {
-        message: "A valid JSON object has to be sent",
+        message: "A valid new user object has to be provided",
       },
       {
         status: 400,
@@ -25,28 +22,32 @@ export async function POST(req) {
     );
   }
 
-  let newUser;
+  // ユーザーの作成　→　データベースに登録
   try {
-    newUser = await prisma.user.create({
+    const newUser = await prisma.user.create({
       data: {
         name: body.name,
         email: body.email,
         password: body.password,
       },
     });
+    console.log("User registered: ", newUser);
+    // JWTトークンの作成
+    const token = await signJWT({
+      userId: user.id,
+    });
+    return NextResponse.json({
+      newUser,
+      token,
+    });
   } catch (error) {
-    console.log(error.message);
     return NextResponse.json(
       {
-        message: "Invalid data sent for user creation",
+        error: error.message,
       },
       {
         status: 400,
       }
     );
   }
-
-  return NextResponse.json(newUser, {
-    status: 201,
-  });
 }

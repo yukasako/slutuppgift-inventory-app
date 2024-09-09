@@ -1,4 +1,5 @@
 import "./globals.css";
+import ItemPage from "./items/page";
 
 export const metadata = {
   title: "Inventory App",

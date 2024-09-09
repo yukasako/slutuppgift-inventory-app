@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function GET(req) {
-  const url = new URL(req.url);
+  let url = new URL(req.url);
   const search = url.searchParams.get("search");
   let items = [];
   //   if (search) {
