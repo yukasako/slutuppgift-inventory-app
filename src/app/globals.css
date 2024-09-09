@@ -96,13 +96,6 @@ button[type="button"]:hover {
 /* Deleteボタンのスタイル */
 .delete-button {
   background-color: #f44336; /* 赤色の背景 */
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
 }
 
 .delete-button:hover {

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-
 // import { useAuth } from "@/context/auth";
 
 function ItemForm() {
@@ -69,6 +68,8 @@ function ItemForm() {
     }
   }
 
+  async function handleEdit() {}
+
   return (
     <div>
       <h2>Create Item</h2>
@@ -126,11 +127,7 @@ function ItemForm() {
             onChange={(e) => setQuantity(Number(e.target.value))}
           />
         </div>
-
-        <div>
-          <button type="submit">Add Item</button>
-          <button type="button">Update Item</button>
-        </div>
+        <button type="submit">Add Item</button>
       </form>
     </div>
   );
