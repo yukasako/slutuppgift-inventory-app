@@ -72,8 +72,8 @@ function ItemForm() {
 
   return (
     <div>
-      <h2>Create Item</h2>
       <form onSubmit={handleSubmit}>
+        <h2>Create Item</h2>
         <div>
           <label htmlFor="name">Name</label>
           <input
