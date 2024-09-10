@@ -1,40 +1,10 @@
 "use client";
 
 import { useState } from "react";
-// import { useAuth } from "@/context/auth";
+import { useAuth } from "@/context/auth";
 
 function ItemForm() {
-  //   const auth = useAuth();
-  //   async function handleSubmit(e) {
-  //     e.preventDefault();
-
-  //     const response = await fetch("/api/books", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${auth.token}`,
-  //       },
-  //       body: JSON.stringify({
-  //         title: "Dune 4",
-  //         author: "Frank Herbert",
-  //         genre: "Sci-fi",
-  //       }),
-  //     });
-
-  //     if (response.ok) {
-  //       const data = await response.json();
-
-  //       console.log(data);
-  //       return;
-  //     }
-
-  //     //TODO: error handling
-  //   }
-
-  // AuthFormからauth.tokenをとってきてる
-  //   if (!auth.token) {
-  //     return <div>You have to be logged in to create a book. :)</div>;
-  //   }
+  const auth = useAuth();
 
   // 入力情報を引っ張る
   const [name, setName] = useState("");
@@ -45,12 +15,18 @@ function ItemForm() {
   async function handleSubmit(event) {
     event.preventDefault(); // フォームのデフォルトの送信動作を防ぐ
 
+    // auth.tokenがあるかの確認。
+    if (!auth.token) {
+      alert("You have to login to add items");
+    }
+
     // POST リクエスト
     const url = "/api/items";
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         name,
