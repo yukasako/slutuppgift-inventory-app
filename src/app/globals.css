@@ -95,6 +95,22 @@ button:hover {
   background-color: #d32f2f; /* ホバー時の背景色 */
 }
 
+/* Filterのスタイル */
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 15px;
+}
+
+.category-checkboxes {
+  display: flex;
+  gap: 10px;
+}
+
 
 @media (prefers-color-scheme: dark) {
   :root {

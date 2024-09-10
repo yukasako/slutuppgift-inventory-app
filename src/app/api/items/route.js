@@ -5,8 +5,8 @@ const prisma = new PrismaClient();
 
 export async function GET(req) {
   let url = new URL(req.url);
-  const search = url.searchParams.get("search");
   let items = [];
+  // const search = url.searchParams.get("search");
   //   if (search) {
   //     items = await prisma.item.findMany({
   //       where: {

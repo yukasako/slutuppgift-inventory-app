@@ -82,6 +82,7 @@ function ItemForm() {
               setCategory(e.target.value); // 状態を更新
             }}
           >
+            <option value="">Choose category</option>
             <option value="food">Food</option>
             <option value="cosmetic">Cosmetic</option>
             <option value="furniture">Furniture</option>

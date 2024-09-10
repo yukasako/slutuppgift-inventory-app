@@ -1,5 +1,6 @@
 import ItemCard from "@/components/ItemCard";
 import ItemForm from "@/components/ItemForm";
+import FilterItem from "@/components/Filter";
 
 export default async function ItemPage() {
   let items = [];
@@ -10,6 +11,7 @@ export default async function ItemPage() {
   return (
     <div>
       <ItemForm />
+      <FilterItem />
       {items &&
         items.map((item) => {
           return <ItemCard {...item} key={item.id} />;

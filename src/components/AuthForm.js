@@ -51,18 +51,18 @@ function AuthForm() {
     }
 
     //重複ユーザー
-    // if (!response.ok) {
-    //   const data = await response.json();
-    //   if (
-    //     data.error ===
-    //     "\nInvalid `prisma.user.create()` invocation:\n\n\nUnique constraint failed on the fields: (`email`)"
-    //   ) {
-    //     alert(
-    //       "This email is already registered. Please use a different email."
-    //     );
-    //   }
-    //   return;
-    // }
+    if (!response.ok) {
+      const data = await response.json();
+      if (
+        data.error ===
+        "\nInvalid `prisma.user.create()` invocation:\n\n\nUnique constraint failed on the fields: (`email`)"
+      ) {
+        alert(
+          "This email is already registered. Please use a different email."
+        );
+      }
+      return;
+    }
   }
 
   return (
