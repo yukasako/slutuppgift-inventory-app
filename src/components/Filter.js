@@ -1,7 +1,12 @@
 "use client";
+import React from "react";
 import { useState } from "react";
 
-export default function FilterItem() {
+export default function FilterItem({ filterParams }) {
+  const handleClick = () => {
+    // 親コンポーネントにデータを送る
+    filterParams("?category=food");
+  };
   return (
     <div className="filter-container">
       <div className="category-checkboxes">
@@ -32,7 +37,9 @@ export default function FilterItem() {
           <option value="1">In Stock</option>
           <option value="0">Out of Stock</option>
         </select>
-        <button className="filter-button">Filter</button>
+        <button onClick={handleClick} className="filter-button">
+          Filter
+        </button>
       </div>
     </div>
   );
