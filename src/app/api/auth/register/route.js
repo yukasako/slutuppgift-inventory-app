@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-// import { signJWT } from "@/utils/helpers/authHelpers";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -9,7 +8,7 @@ export async function POST(req) {
   try {
     body = await req.json();
     if (!body.email || !body.password || !body.name) {
-      throw new Error();
+      alert("Enter your email, password, and name.");
     }
   } catch (error) {
     return NextResponse.json(
@@ -26,19 +25,14 @@ export async function POST(req) {
   try {
     const newUser = await prisma.user.create({
       data: {
-        name: body.name,
         email: body.email,
         password: body.password,
+        name: body.name,
       },
     });
     console.log("User registered: ", newUser);
-    // JWTトークンの作成
-    const token = await signJWT({
-      userId: user.id,
-    });
     return NextResponse.json({
       newUser,
-      token,
     });
   } catch (error) {
     return NextResponse.json(

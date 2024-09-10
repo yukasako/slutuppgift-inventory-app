@@ -45,7 +45,7 @@ function ItemForm() {
   async function handleSubmit(event) {
     event.preventDefault(); // フォームのデフォルトの送信動作を防ぐ
 
-    // POST リクエストなど
+    // POST リクエスト
     const url = "/api/items";
     const response = await fetch(url, {
       method: "POST",
@@ -67,8 +67,6 @@ function ItemForm() {
       console.error("Failed to submit:", response.statusText);
     }
   }
-
-  async function handleEdit() {}
 
   return (
     <div>

@@ -8,7 +8,6 @@ export async function POST(req) {
   let body;
   try {
     body = await req.json();
-    console.log(body);
     if (!body.email || !body.password) {
       throw new Error();
     }
@@ -30,6 +29,7 @@ export async function POST(req) {
       },
     });
 
+    // パスワードの照合
     if (!user || user.password !== body.password) {
       throw new Error("Invalid login credentials");
     }
