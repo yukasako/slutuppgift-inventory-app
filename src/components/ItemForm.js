@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAuth } from "@/context/auth";
 
 function ItemForm() {
+  // 認証確認
   const auth = useAuth();
 
   // 入力情報を引っ張る
@@ -15,9 +16,9 @@ function ItemForm() {
   async function handleSubmit(event) {
     event.preventDefault(); // フォームのデフォルトの送信動作を防ぐ
 
-    // auth.tokenがあるかの確認。
+    // auth.tokenがない（ログインしていない）場合。
     if (!auth.token) {
-      alert("You have to login to add items");
+      alert("You have to login to ADD items");
     }
 
     // POST リクエスト
@@ -26,7 +27,7 @@ function ItemForm() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${auth.token}`,
       },
       body: JSON.stringify({
         name,

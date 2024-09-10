@@ -1,7 +1,11 @@
 "use client";
 import React, { useState } from "react";
+import { useAuth } from "@/context/auth";
 
 export default function ItemCard(props) {
+  // 認証確認
+  const auth = useAuth();
+
   //編集モードをトグルする。初期値はFalseだが、クリックでTrueになった時、{isEditing && 以下の内容を表示に。
   const [isEditing, setIsEditing] = useState(false);
   // IsEditingがTrueの時に表示されるフォームの内容。
@@ -13,12 +17,19 @@ export default function ItemCard(props) {
   //編集
   async function handleUpdate(event) {
     event.preventDefault();
+
+    // auth.tokenがない（ログインしていない）場合。
+    if (!auth.token) {
+      alert("You have to login to UPDATE items");
+    }
+
     const response = await fetch(
       `http://localhost:3000/api/items/${props.id}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
         },
         body: JSON.stringify({
           name,
@@ -38,11 +49,17 @@ export default function ItemCard(props) {
 
   //　Delete
   async function handleDelete() {
+    if (!auth.token) {
+      alert("You have to login to DELETE");
+    }
     try {
       const response = await fetch(
         `http://localhost:3000/api/items/${props.id}`,
         {
           method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
         }
       );
       if (response.ok) {
