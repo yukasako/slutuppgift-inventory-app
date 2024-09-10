@@ -6,48 +6,68 @@ export async function GET(req) {
   let url = new URL(req.url);
   let items = [];
 
-  const category = url.searchParams.get("category");
+  // Category複数選択
+  const categories = [];
+  for (const [key, value] of url.searchParams.entries()) {
+    if (key === "category") {
+      categories.push(value);
+    }
+  }
+  // 在庫状況チェック
   const quantity = url.searchParams.get("quantity");
 
   // カテゴリー選択されている場合
-  if (category) {
+  if (categories.length > 0) {
+    // 在庫なし
     if (quantity === "0") {
-      // 在庫が0のアイテムを取得
       items = await prisma.item.findMany({
         where: {
           category: {
-            contains: category,
+            in: categories,
             mode: "insensitive",
           },
           quantity: 0,
         },
       });
-    } else {
-      // 在庫が0以外のアイテムを取得
+    }
+    // 在庫あり
+    else if (quantity === "1") {
       items = await prisma.item.findMany({
         where: {
           category: {
-            contains: category,
+            in: categories,
             mode: "insensitive",
           },
           quantity: {
             not: 0,
+          },
+        },
+      });
+    }
+    // 在庫状況が指定されていない場合
+    else {
+      items = await prisma.item.findMany({
+        where: {
+          category: {
+            in: categories,
+            mode: "insensitive",
           },
         },
       });
     }
   }
-  // 在庫状況のみ指定されている場合
-  else if (!category) {
+  // カテゴリー未選択。在庫状況のみ選択
+  else {
+    // 在庫なし
     if (quantity === "0") {
-      // 在庫が0のアイテムを取得
       items = await prisma.item.findMany({
         where: {
           quantity: 0,
         },
       });
-    } else {
-      // 在庫が0以外のアイテムを取得
+    }
+    // 在庫あり
+    else if (quantity === "1") {
       items = await prisma.item.findMany({
         where: {
           quantity: {
@@ -56,8 +76,10 @@ export async function GET(req) {
         },
       });
     }
-  } else {
-    items = await prisma.item.findMany();
+    // 在庫選択なし
+    else {
+      items = await prisma.item.findMany();
+    }
   }
   return NextResponse.json(items);
 }

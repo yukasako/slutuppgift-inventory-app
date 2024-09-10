@@ -28,8 +28,9 @@ export default function FilterItem() {
       </div>
       <div>
         <select className="stock-select">
-          <option value="inStock">In Stock</option>
-          <option value="outOfStock">Out of Stock</option>
+          <option value="">All</option>
+          <option value="1">In Stock</option>
+          <option value="0">Out of Stock</option>
         </select>
         <button className="filter-button">Filter</button>
       </div>
