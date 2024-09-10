@@ -1,13 +1,16 @@
-"use client";
+// このコードの目的は、アプリケーション全体でユーザーの認証状態を管理し、
+// 認証に関連する情報（トークンなど）や操作（ログアウトなど）を提供することです。
+// これにより、アプリケーションの任意の部分から認証状態を簡単に管理し、利用することができます。
 
+"use client";
 import { createContext, useContext, useEffect, useState } from "react";
 
+// 1. AuthContextの作成
 const defaultState = {
   token: null,
   setToken: () => {},
   logout: () => {},
 };
-
 const AuthContext = createContext(defaultState);
 
 function AuthProvider({ children }) {
@@ -18,9 +21,9 @@ function AuthProvider({ children }) {
   // トークンをlocalStorageから取得
   useEffect(() => {
     const _token = localStorage.getItem("@library/token");
-    // if (_token) {
-    //   setToken(_token);
-    // }
+    if (_token) {
+      setToken(_token);
+    }
   }, []);
 
   function logout() {

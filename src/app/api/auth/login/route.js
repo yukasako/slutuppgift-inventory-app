@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-// import { signJWT } from "@/utils/helpers/authHelpers";
+import { signJWT } from "@/context/JWT";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -34,13 +34,13 @@ export async function POST(req) {
       throw new Error("Invalid login credentials");
     }
 
-    // const token = await signJWT({
-    //   userId: user.id,
-    // });
-    // return NextResponse.json({
-    //   user,
-    //   token,
-    // });
+    const token = await signJWT({
+      userId: user.id,
+    });
+    return NextResponse.json({
+      user,
+      token,
+    });
   } catch (error) {
     return NextResponse.json(
       {

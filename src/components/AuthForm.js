@@ -43,7 +43,6 @@ function AuthForm() {
       }
 
       if (action === "login") {
-        console.log("data", data);
         localStorage.setItem("@library/token", data.token);
         auth.setToken(data.token);
         router.push("/items");
@@ -51,18 +50,19 @@ function AuthForm() {
       }
     }
 
-    if (!response.ok) {
-      const data = await response.json();
-      if (
-        data.error ===
-        "\nInvalid `prisma.user.create()` invocation:\n\n\nUnique constraint failed on the fields: (`email`)"
-      ) {
-        alert(
-          "This email is already registered. Please use a different email."
-        );
-      }
-      return;
-    }
+    //重複ユーザー
+    // if (!response.ok) {
+    //   const data = await response.json();
+    //   if (
+    //     data.error ===
+    //     "\nInvalid `prisma.user.create()` invocation:\n\n\nUnique constraint failed on the fields: (`email`)"
+    //   ) {
+    //     alert(
+    //       "This email is already registered. Please use a different email."
+    //     );
+    //   }
+    //   return;
+    // }
   }
 
   return (
