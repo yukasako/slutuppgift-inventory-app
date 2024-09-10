@@ -44,6 +44,7 @@ export async function PUT(req, options) {
         name: body.name,
         description: body.description,
         quantity: body.quantity,
+        category: body.category,
       },
     });
     return NextResponse.json(updatedItem);

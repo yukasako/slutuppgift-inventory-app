@@ -97,7 +97,7 @@ function ItemForm() {
             type="number"
             id="quantity"
             name="quantity"
-            min="1"
+            min="0"
             placeholder="Enter quantity"
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
