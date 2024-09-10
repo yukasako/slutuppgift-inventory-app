@@ -1,5 +1,6 @@
 import "./globals.css";
-import ItemPage from "./items/page";
+import Header from "@/components/Header";
+import { AuthProvider } from "@/context/auth";
 
 export const metadata = {
   title: "Inventory App",
@@ -10,9 +11,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        header
-        {children}
-        footer
+        <AuthProvider>
+          <Header />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
