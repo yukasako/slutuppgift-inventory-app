@@ -67,11 +67,13 @@ function AuthForm() {
 
   return (
     <div className="login-form">
-      <h2>Login</h2>
+      <h2>login</h2>
       <form onSubmit={handleSubmit}>
         {/* Name input */}
         <div className="form-group">
-          <label htmlFor="name">Name</label>
+          <label className="bold" htmlFor="name">
+            Name
+          </label>
           <input
             type="text"
             id="name"
@@ -85,7 +87,9 @@ function AuthForm() {
 
         {/* Email input */}
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label className="bold" htmlFor="email">
+            Email
+          </label>
           <input
             type="email"
             id="email"
@@ -99,7 +103,9 @@ function AuthForm() {
 
         {/* Password input */}
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label className="bold" htmlFor="password">
+            Password
+          </label>
           <input
             type="password"
             id="password"

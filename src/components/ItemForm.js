@@ -50,7 +50,9 @@ function ItemForm() {
       <form onSubmit={handleSubmit}>
         <h2>Create Item</h2>
         <div>
-          <label htmlFor="name">Name</label>
+          <label className="bold" htmlFor="name">
+            Name
+          </label>
           <input
             type="text"
             id="name"
@@ -62,7 +64,9 @@ function ItemForm() {
         </div>
 
         <div>
-          <label htmlFor="description">Description</label>
+          <label className="bold" htmlFor="description">
+            Description
+          </label>
           <textarea
             id="description"
             name="description"
@@ -73,7 +77,9 @@ function ItemForm() {
         </div>
 
         <div>
-          <label htmlFor="category">Category</label>
+          <label className="bold" htmlFor="category">
+            Category
+          </label>
           <select
             id="category"
             name="category"
@@ -92,7 +98,9 @@ function ItemForm() {
         </div>
 
         <div>
-          <label htmlFor="quantity">Quantity</label>
+          <label className="bold" htmlFor="quantity">
+            Quantity
+          </label>
           <input
             type="number"
             id="quantity"

@@ -7,36 +7,53 @@
   --foreground: #171717;
 }
 
-/* フォーム全体のスタイル */
+/* 各入力項目のスタイル */
+h1{
+  text-align: center;
+  font-weight: bold;
+  font-size: x-large;
+}
 h2{
   text-align: center;
   font-weight: bold;
+  font-size: large;
+  margin: 10px;
+}
+h3{
+  text-align: center;
+  font-weight: bold;
+  margin: 10px;
+}
+.bold{
+  font-weight: bold;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-/* 各入力項目のスタイル */
 div {
   margin-bottom: 15px;
 }
 
-/* ラベルのスタイル */
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #63cbbf;
+  padding: 20px;
+  color: rgb(0, 0, 0);
+  font-size: 24px;
+  margin-bottom: 50px;
+}
+header button{
+  background-color: #25726e;
+  color:white;
+}
+
+
+/* テキスト入力フィールドとテキストエリアのスタイル */
 label {
   display: block;
   margin-bottom: 5px;
-  font-weight: bold;
 }
-
-/* テキスト入力フィールドとテキストエリアのスタイル */
 input[type="text"],
 input[type="number"],
 input[type="email"],
@@ -57,7 +74,7 @@ textarea {
 
 /* ボタンのスタイル */
 button {
-  background-color: #4CAF50; /* 緑色の背景 */
+  background-color: #2aa597; /* 緑色の背景 */
   color: white;              /* 白い文字 */
   border: none;
   padding: 10px 20px;
@@ -70,7 +87,7 @@ button {
 
 /* ボタンのホバー効果 */
 button:hover {
-  background-color: #45a049; /* ホバー時の背景色 */
+  background-color: #25726e; /* ホバー時の背景色 */
 }
 
 .item-card {
@@ -81,18 +98,31 @@ button:hover {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
-  margin-bottom: 15px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   background-color: #fff;
+  width: 500px;
+  margin: 15px auto;
 }
 
 /* Deleteボタンのスタイル */
 .delete-button {
-  background-color: #f44336; /* 赤色の背景 */
+  background-color: #fa6a78; /* 赤色の背景 */
 }
 
 .delete-button:hover {
   background-color: #d32f2f; /* ホバー時の背景色 */
+}
+
+/* フォームのスタイル */
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 4px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 /* Filterのスタイル */
@@ -100,17 +130,18 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #ddd;
+  border: 4px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   padding: 15px;
+  width: 500px;
+  margin: 20px auto;
 }
 
 .category-checkboxes {
   display: flex;
   gap: 10px;
 }
-
 
 @media (prefers-color-scheme: dark) {
   :root {

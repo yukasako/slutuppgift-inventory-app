@@ -76,7 +76,7 @@ export default function ItemCard(props) {
   return (
     <div className="item-card">
       <div>
-        <h3>Name: {props.name}</h3>
+        <p className="bold">Name: {props.name}</p>
         <p>Description: {props.description}</p>
         <p>Quantity: {props.quantity}</p>
         <p>Category: {props.category}</p>

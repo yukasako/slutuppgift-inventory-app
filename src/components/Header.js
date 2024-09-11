@@ -13,6 +13,7 @@ function Header() {
 
   return (
     <header>
+      <h1>Inventory App</h1>
       {auth.token ? (
         <button onClick={handleLogout}>Logout</button>
       ) : (

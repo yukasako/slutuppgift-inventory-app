@@ -41,6 +41,7 @@ export default function FilterItem({ filterParams }) {
 
   return (
     <div className="filter-container">
+      <h3>Filter by Category</h3>
       <div className="category-checkboxes">
         <label>
           <input type="checkbox" value="food" onChange={handleCategoryChange} />
@@ -76,6 +77,7 @@ export default function FilterItem({ filterParams }) {
         </label>
       </div>
       <div>
+        <h3>Stcok status</h3>
         <select className="stock-select" onChange={handleStockChange}>
           <option value="">All</option>
           <option value="1">In Stock</option>
