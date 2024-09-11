@@ -16,11 +16,6 @@ function ItemForm() {
   async function handleSubmit(event) {
     event.preventDefault(); // フォームのデフォルトの送信動作を防ぐ
 
-    // auth.tokenがない（ログインしていない）場合。
-    // if (!auth.token) {
-    //   alert("You have to login to ADD items");
-    // }
-
     // POST リクエスト
     const url = "/api/items";
     const response = await fetch(url, {
@@ -41,7 +36,7 @@ function ItemForm() {
       const data = await response.json();
       console.log("Response Data:", data);
     } else {
-      // エラーメッセージはBodyに入ってるからデータとして取り出し
+      // middlewareからの認証エラー。エラーメッセージはBodyに入ってるからデータとして取り出し。
       const data = await response.json();
       const errorMessage = await data.error;
       console.log(data);

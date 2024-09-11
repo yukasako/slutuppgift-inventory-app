@@ -41,7 +41,6 @@ function AuthForm() {
       if (action === "register") {
         alert("User is registered");
       }
-
       if (action === "login") {
         localStorage.setItem("@library/token", data.token);
         auth.setToken(data.token);
@@ -49,17 +48,21 @@ function AuthForm() {
         return;
       }
     }
-
-    //重複ユーザー
-    if (!response.ok) {
+    // レスポンスがOKにならずエラー
+    else {
       const data = await response.json();
+      //重複ユーザー(api/auth/registerから)
       if (
+        action === "register" &&
         data.error ===
-        "\nInvalid `prisma.user.create()` invocation:\n\n\nUnique constraint failed on the fields: (`email`)"
+          "\nInvalid `prisma.user.create()` invocation:\n\n\nUnique constraint failed on the fields: (`email`)"
       ) {
         alert(
-          "This email is already registered. Please use a different email."
+          `Status ${response.status}: This email is already registered. Please use a different email.`
         );
+      } else {
+        //未登録 (api/auth/loginから)
+        alert(`Status ${response.status}: ${data.error}`);
       }
       return;
     }

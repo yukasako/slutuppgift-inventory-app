@@ -14,7 +14,7 @@ export default function ItemCard(props) {
   const [quantity, setQuantity] = useState(props.quantity);
   const [category, setCategory] = useState(props.category);
 
-  //編集
+  // Edit
   async function handleUpdate(event) {
     event.preventDefault();
 
@@ -38,7 +38,7 @@ export default function ItemCard(props) {
       window.location.reload(); // 成功後にページを再読み込み
       console.log("Item updated successfully");
     } else {
-      // OKじゃなかった場合エラーメッセージはBodyに入ってるからデータとして取り出し
+      // middlewareからの認証エラー。エラーメッセージはBodyに入ってるからデータとして取り出し。
       const data = await response.json();
       const errorMessage = await data.error;
       console.log(data);
@@ -64,7 +64,7 @@ export default function ItemCard(props) {
         window.location.reload(); // 削除後にページを再読み込み
         console.log("Item deleted successfully");
       } else {
-        // OKじゃなかった場合エラーメッセージはBodyに入ってるからデータとして取り出し
+        // middlewareからの認証エラー。エラーメッセージはBodyに入ってるからデータとして取り出し。
         const data = await response.json();
         const errorMessage = await data.error;
         console.log(data);
@@ -86,6 +86,7 @@ export default function ItemCard(props) {
         <p>Category: {props.category}</p>
       </div>
       <div>
+        {/* 編集モードか通常モードかのトグル */}
         <button onClick={() => setIsEditing(!isEditing)}>
           {isEditing ? "Cancel" : "Edit"}
         </button>
