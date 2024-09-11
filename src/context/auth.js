@@ -13,12 +13,11 @@ const defaultState = {
 };
 const AuthContext = createContext(defaultState);
 
+// tokenの状態を管理する機能。tokenは、ユーザーがログインしているかどうかの判断に使う。
 function AuthProvider({ children }) {
-  // tokenの状態を管理。useState で token を保持します。
-  // この token は、ユーザーがログインしているかどうかを判断するために使います。
   const [token, setToken] = useState(defaultState.token);
 
-  // トークンをlocalStorageから取得
+  // AuthProviderがレンダーされる度（つまりページ更新時）に、localStorageから取得。
   useEffect(() => {
     const _token = localStorage.getItem("@library/token");
     if (_token) {
@@ -26,6 +25,7 @@ function AuthProvider({ children }) {
     }
   }, []);
 
+  // ログアウトしたらトークン削除。
   function logout() {
     localStorage.removeItem("@library/token");
     setToken(null);
@@ -44,6 +44,7 @@ function AuthProvider({ children }) {
   );
 }
 
+// Tokenを取りだす時（POST, PUT, DELETE時）や設定する時（Login時）に使う。
 function useAuth() {
   return useContext(AuthContext);
 }

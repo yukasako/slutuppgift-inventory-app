@@ -9,8 +9,6 @@ const unsafeMethods = ["POST", "PUT", "DELETE"];
 
 // middleware 関数: リクエストが送信されるたびに実行され、JWTトークンの検証を行います。
 export async function middleware(req) {
-  // console.log("req", req);
-  // console.log("Middleware is running", req.url);
   const url = new URL(req.url);
 
   // リクエストが保護対象か確認。(上のunsafeMethods参照)

@@ -42,7 +42,9 @@ function AuthForm() {
         alert("User is registered");
       }
       if (action === "login") {
+        // LocalStorageにトークン設置
         localStorage.setItem("@library/token", data.token);
+        // Authにもトークン設置
         auth.setToken(data.token);
         router.push("/items");
         return;
