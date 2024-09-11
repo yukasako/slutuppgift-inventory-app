@@ -18,11 +18,6 @@ export default function ItemCard(props) {
   async function handleUpdate(event) {
     event.preventDefault();
 
-    // auth.tokenがない（ログインしていない）場合。
-    if (!auth.token) {
-      alert("You have to login to UPDATE items");
-    }
-
     const response = await fetch(
       `http://localhost:3000/api/items/${props.id}`,
       {
@@ -43,15 +38,18 @@ export default function ItemCard(props) {
       window.location.reload(); // 成功後にページを再読み込み
       console.log("Item updated successfully");
     } else {
-      console.error("Failed to update item");
+      // OKじゃなかった場合エラーメッセージはBodyに入ってるからデータとして取り出し
+      const data = await response.json();
+      const errorMessage = await data.error;
+      console.log(data);
+      alert(
+        `Status ${response.status}: ${response.statusText}.\n${errorMessage}`
+      );
     }
   }
 
   //　Delete
   async function handleDelete() {
-    if (!auth.token) {
-      alert("You have to login to DELETE");
-    }
     try {
       const response = await fetch(
         `http://localhost:3000/api/items/${props.id}`,
@@ -66,7 +64,13 @@ export default function ItemCard(props) {
         window.location.reload(); // 削除後にページを再読み込み
         console.log("Item deleted successfully");
       } else {
-        console.error("Failed to delete item");
+        // OKじゃなかった場合エラーメッセージはBodyに入ってるからデータとして取り出し
+        const data = await response.json();
+        const errorMessage = await data.error;
+        console.log(data);
+        alert(
+          `Status ${response.status}: ${response.statusText}.\n${errorMessage}`
+        );
       }
     } catch (error) {
       console.error("Error:", error);

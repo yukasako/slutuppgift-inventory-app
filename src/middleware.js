@@ -39,7 +39,7 @@ export async function middleware(req) {
     } catch (error) {
       return NextResponse.json(
         {
-          error: "Unauthorized request",
+          error: "You need to login to Add, Edit and Delete.",
         },
         { status: 401 }
       );
