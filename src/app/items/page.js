@@ -17,10 +17,12 @@ export default function ItemPage() {
     setParams(newParams);
   };
 
+  // クライアントコンポーネント では、useEffect の中で非同期処理を行うのが一般的です。
+  // useEffect はクライアントサイドのレンダリング後に実行されるため、その中で async/await を使うことでデータを非同期にフェッチできます。
   useEffect(() => {
     async function fetchData(param) {
       const url = param
-        ? `http://localhost:3000/api/items/filter${param}`
+        ? `http://localhost:3000/api/items/filter?${param}`
         : "http://localhost:3000/api/items";
       try {
         const response = await fetch(url);
