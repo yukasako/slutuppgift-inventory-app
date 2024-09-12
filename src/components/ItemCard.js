@@ -42,9 +42,7 @@ export default function ItemCard(props) {
       const data = await response.json();
       const errorMessage = await data.error;
       console.log(data);
-      alert(
-        `Status ${response.status}: ${response.statusText}.\n${errorMessage}`
-      );
+      alert(errorMessage);
     }
   }
 

@@ -40,12 +40,10 @@ function ItemForm() {
       const data = await response.json();
       const errorMessage = await data.error;
       console.log(data);
-      alert(
-        `Status ${response.status}: ${response.statusText}.\n${errorMessage}`
-      );
+      alert(errorMessage);
     }
   }
-
+  if (!auth.token) return <p>You need to be logged in to create a item</p>;
   return (
     <div>
       <form onSubmit={handleSubmit}>

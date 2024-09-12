@@ -36,6 +36,7 @@ export async function POST(req) {
     });
   } catch (error) {
     return NextResponse.json(
+      // ここのメッセージをフロントで拾い、重複エラーだったら人間にわかりやすいエラーにして吐かせる。
       {
         error: error.message,
       },
