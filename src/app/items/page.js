@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import ItemCard from "@/components/ItemCard";
 import ItemForm from "@/components/ItemForm";
 import FilterItem from "@/components/Filter";
+import { useAuth } from "@/context/auth";
 
 export default function ItemPage() {
   const [items, setItems] = useState([]);
@@ -36,8 +37,15 @@ export default function ItemPage() {
     fetchData(params);
   }, [params]); // paramsが変更されるたびに実行
 
+  const auth = useAuth();
+  let loginMessage = "Welcome!";
+  if (!auth.token) {
+    loginMessage = "You need to be logged in to Create, Edit and Delete items";
+  }
+
   return (
     <div>
+      <p className="loginMessage">{loginMessage}</p>
       <ItemForm />
       <FilterItem filterParams={paramsChange} />
       {items &&

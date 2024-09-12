@@ -43,7 +43,6 @@ function ItemForm() {
       alert(errorMessage);
     }
   }
-  if (!auth.token) return <p>You need to be logged in to create a item</p>;
   return (
     <div>
       <form onSubmit={handleSubmit}>

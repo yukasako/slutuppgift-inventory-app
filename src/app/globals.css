@@ -48,6 +48,11 @@ header button{
   color:white;
 }
 
+.loginMessage{
+  text-align: center;
+  font-weight: bold;
+}
+
 
 /* テキスト入力フィールドとテキストエリアのスタイル */
 label {
