@@ -60,11 +60,11 @@ function AuthForm() {
           "\nInvalid `prisma.user.create()` invocation:\n\n\nUnique constraint failed on the fields: (`email`)"
       ) {
         alert(
-          `Status ${response.status}: This email is already registered. Please use a different email.`
+          `This email is already registered. Please use a different email.`
         );
       } else {
         //未登録 (api/auth/loginから)
-        alert(`Status ${response.status}: ${data.error}`);
+        alert(data.error);
       }
       return;
     }
