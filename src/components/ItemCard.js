@@ -2,38 +2,35 @@
 import React, { useState } from "react";
 import { useAuth } from "@/context/auth";
 
-export default function ItemCard(props) {
+export default function ItemCard(item) {
   // 認証確認
   const auth = useAuth();
 
   //編集モードをトグルする。初期値はFalseだが、クリックでTrueになった時、{isEditing && 以下の内容を表示に。
   const [isEditing, setIsEditing] = useState(false);
   // IsEditingがTrueの時に表示されるフォームの内容。
-  const [name, setName] = useState(props.name);
-  const [description, setDescription] = useState(props.description);
-  const [quantity, setQuantity] = useState(props.quantity);
-  const [category, setCategory] = useState(props.category);
+  const [name, setName] = useState(item.name);
+  const [description, setDescription] = useState(item.description);
+  const [quantity, setQuantity] = useState(item.quantity);
+  const [category, setCategory] = useState(item.category);
 
   // Edit
   async function handleUpdate(event) {
     event.preventDefault();
 
-    const response = await fetch(
-      `http://localhost:3000/api/items/${props.id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${auth.token}`,
-        },
-        body: JSON.stringify({
-          name,
-          description,
-          quantity,
-          category,
-        }),
-      }
-    );
+    const response = await fetch(`http://localhost:3000/api/items/${item.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${auth.token}`,
+      },
+      body: JSON.stringify({
+        name,
+        description,
+        quantity,
+        category,
+      }),
+    });
     if (response.ok) {
       window.location.reload(); // 成功後にページを再読み込み
       console.log("Item updated successfully");
@@ -50,7 +47,7 @@ export default function ItemCard(props) {
   async function handleDelete() {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/items/${props.id}`,
+        `http://localhost:3000/api/items/${item.id}`,
         {
           method: "DELETE",
           headers: {
@@ -76,10 +73,10 @@ export default function ItemCard(props) {
   return (
     <div className="item-card">
       <div>
-        <p className="bold">Name: {props.name}</p>
-        <p>Description: {props.description}</p>
-        <p>Quantity: {props.quantity}</p>
-        <p>Category: {props.category}</p>
+        <p className="bold">Name: {item.name}</p>
+        <p>Description: {item.description}</p>
+        <p>Quantity: {item.quantity}</p>
+        <p>Category: {item.category}</p>
       </div>
       <div>
         {/* 編集モードか通常モードかのトグル */}
